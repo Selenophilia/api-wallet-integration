@@ -3,11 +3,6 @@ import User from "App/Models/User";
 import { rules, schema } from "@ioc:Adonis/Core/Validator";
 
 export default class UsersController {
-  public async getAllUser() {
-    const user = await User.all();
-    return user;
-  }
-
   public async createUser(ctx: HttpContextContract) {
     const { request, response } = ctx;
     const { username, email, password } = request.body();

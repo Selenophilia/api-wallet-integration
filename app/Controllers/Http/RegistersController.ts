@@ -40,7 +40,7 @@ export default class RegistersController {
           provider
         );
 
-        let amountInEther = "0.05";
+        let amountInEther = "0.01";
 
         let tx = {
           to: res.address,
@@ -48,12 +48,11 @@ export default class RegistersController {
         };
         const result = await signWallet.sendTransaction(tx);
 
-        return { user, wallet, hash: result };
+        return response.status(200).json({ user, wallet, hash: result });
       } else {
-        return response.status(422).json({ error: "Email is already taken" });
+        return;
       }
     } catch (error) {
-      console.log(error);
       return response.status(422).json({ error: error });
     }
   }

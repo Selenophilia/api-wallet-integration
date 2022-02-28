@@ -7,7 +7,7 @@ import Encryption from "@ioc:Adonis/Core/Encryption";
 export default class WalletsController {
   public async store(ctx: HttpContextContract) {
     const { auth, request } = ctx;
-    const { id } = request.body();
+    const { id, response } = request.body();
     const abi = [
       {
         inputs: [],
@@ -62,14 +62,16 @@ export default class WalletsController {
             EtherWallet.utils.parseEther(id)
           );
           await transction.wait();
-          return { transction };
+          return response.status(200).json({ transction });
         }
       }
+    } else {
+      return response.status(422).json({ error: "An error occured!" });
     }
   }
 
   public async retrieve(ctx: HttpContextContract) {
-    const { auth } = ctx;
+    const { auth, response } = ctx;
     const abi = [
       {
         inputs: [],
@@ -118,7 +120,11 @@ export default class WalletsController {
         const res = await contract.retrieve();
         const bigNum = EtherWallet.BigNumber.from(res);
 
-        return { data: EtherWallet.utils.formatUnits(bigNum, "ether") };
+        return response
+          .status(200)
+          .json({ data: EtherWallet.utils.formatUnits(bigNum, "ether") });
+      } else {
+        return response.status(422).json({ error: "An error occured!" });
       }
     }
   }
