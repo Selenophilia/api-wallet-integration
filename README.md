@@ -14,9 +14,10 @@
 
 ## Development Setup
 
-1. `$ git clone git@github.com:Selenophilia/api-wallet-integration.git && cd backend-blockchain-exam`
-2. `$ npm install`
-3. `$ node ace serve --watch`
+1. `$ git clone git@github.com:Selenophilia/api-wallet-integration.git`
+2. `$ cd api-wallet-integration`
+3. `$ npm install`
+4. `$ node ace serve --watch`
 
 ## Copy .env file.
 1. `$ cp .env.example .env`
